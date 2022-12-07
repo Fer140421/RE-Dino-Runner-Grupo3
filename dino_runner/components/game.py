@@ -1,7 +1,7 @@
 import pygame
 from dino_runner.components.dinosaur import Dinosaur
 
-from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
+from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, SMALL_CACTUS, TITLE, FPS
 
 
 class Game:
@@ -16,6 +16,7 @@ class Game:
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.player = Dinosaur()
+        self.obstacles = [Cactus(SMALL_CACTUS)]
 
     def run(self):
         # Game loop: events - update - draw
@@ -34,6 +35,7 @@ class Game:
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
+        self.obstacles[0].update(self.game_speed,self.obstacles)
 
     def draw(self):
         self.clock.tick(FPS)
